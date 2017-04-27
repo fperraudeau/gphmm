@@ -1,0 +1,62 @@
+---
+title: "Vignette gphmm train"
+author: "Fanny Perraudeau"
+date: "04/26/2017"
+output: 
+  html_document: 
+    fig_height: 10
+    fig_width: 10
+    toc: yes
+    code_folding: hide
+    toc_float: yes
+---
+
+```{r options, echo=FALSE, results="hide",message=FALSE, error=FALSE, include=FALSE, autodep=TRUE}
+knitr::opts_chunk$set(fig.align="center", cache=FALSE, error=FALSE, message=FALSE, warning=TRUE)
+library(gphmm)
+library(jsonlite)
+library(Biostrings)
+```
+
+# Commandline tool
+```{bash}
+../inst/gphmm.R --help
+```
+
+
+```{r}
+n = 50
+```
+
+Let's randomly generate `r n` sequences
+```{r}
+seqs = generateRandomSequences(n = n, meanLen = 100, sdLen = 2,
+                               seed = 7373)
+writeXStringSet(seqs, 'queries.fasta')
+seqs
+```
+
+
+```{r}
+toCompute = data.frame(query = rep(paste0('s', 1:n), n),
+                       ref = rep(paste0('s', 1:n), each = n))
+toCompute[, 'qv'] = rnorm(nrow(toCompute), 20, 2)
+write.table(toCompute, 'toCompute.csv')
+head(toCompute)
+```
+
+
+```{bash}
+../inst/gphmm.R train queries.fasta toCompute.csv --verbose --maxit=5
+```
+
+The output file is the same as the csv file, but a column has been added for the computed GPHMM probabilities 
+```{r}
+fromJSON('toCompute_paramgphmm.json')
+```
+
+```{r}
+ll = fromJSON('toCompute_llgphmm.json')
+plot(1:length(ll), ll, xlab = 'Iterations', ylab = 'Log Likelihood',
+     type = 'l', main = 'Log likelihood')
+```
