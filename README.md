@@ -1,6 +1,9 @@
-# gphmm
-Compute and train Generalized Pair Hidden Markov Chain Model.
 
-To install the package
+# Wbretriever
 
-To use commandline tool, export then call with --help
+Classify 3rd-generation sequencing reads.
+
+
+Here is the badge:
+
+[![Build Status](https://travis-ci.com/fperraudeau/gphmm.svg?token=ytLv1sMU2PLnbscswr5x&branch=master)](https://travis-ci.org/fperraudeau/gphmm)
