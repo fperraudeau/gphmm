@@ -136,7 +136,8 @@ splitTrainTest <- function(y, proptrain = 0.8, seed = NULL){
 #' @param seed       - int, when the same seed and parameters are used, exact same sequences are generated.
 #' @param ncores     - int, number of cores to use.
 generateRandomSequences <- function(n = 2,  meanLen = 10, sdLen = 0,
-                                    seed = NULL, ncores = NULL){
+                                    seed = NULL, ncores = NULL,
+                                    prob = rep(.25, 4)){
   if (!is.null(seed)){
     stopifnot(class(seed) == 'numeric')
     set.seed(seed)
@@ -147,7 +148,7 @@ generateRandomSequences <- function(n = 2,  meanLen = 10, sdLen = 0,
   if (!is.null(ncores)){
     stopifnot(class(ncores) == 'numeric')
     seqs = mclapply(1:n, function(i){
-      paste(sample(c('A', 'C', 'G', 'T'), length[i], replace = T), collapse = '')
+      paste(sample(c('A', 'C', 'G', 'T'), length[i], replace = T, prob = prob), collapse = '')
     }, mc.cores = ncores)
     seqs = unlist(seqs)
   } else{

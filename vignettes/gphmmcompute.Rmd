@@ -3,12 +3,12 @@ title: "Vignette gphmm compute"
 author: "Fanny Perraudeau"
 date: "04/26/2017"
 output: 
-  html_document: 
-    fig_height: 10
-    fig_width: 10
-    toc: yes
-    code_folding: hide
-    toc_float: yes
+    html_document: 
+      code_folding: hide
+      fig_height: 10
+      fig_width: 10
+      toc: yes
+      toc_float: yes
 ---
 
 ```{r options, echo=FALSE, results="hide",message=FALSE, error=FALSE, include=FALSE, autodep=TRUE}
