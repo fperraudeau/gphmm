@@ -126,38 +126,3 @@ splitTrainTest <- function(y, proptrain = 0.8, seed = NULL){
   list(train = trainIdx, test = testIdx)
 }
 
-#' Split randomly any R object for which method length() has been defined into a train set and a test set.
-#' 
-#' \code{generateRandomSequences} returns a list with indices for train and test sets.
-#' 
-#' @param n          - int, number of sequences to generate.
-#' @param meanLen    - float, mean of the length distribution (gaussian) of the generated sequences.
-#' @param sdLen      - float, sd of the length distribution (gaussian) of the generated sequences.
-#' @param seed       - int, when the same seed and parameters are used, exact same sequences are generated.
-#' @param ncores     - int, number of cores to use.
-generateRandomSequences <- function(n = 2,  meanLen = 10, sdLen = 0,
-                                    seed = NULL, ncores = NULL,
-                                    prob = rep(.25, 4)){
-  if (!is.null(seed)){
-    stopifnot(class(seed) == 'numeric')
-    set.seed(seed)
-  }
-  
-  length = round(rnorm(n = n, mean = meanLen, sd = sdLen))
-  
-  if (!is.null(ncores)){
-    stopifnot(class(ncores) == 'numeric')
-    seqs = mclapply(1:n, function(i){
-      paste(sample(c('A', 'C', 'G', 'T'), length[i], replace = T, prob = prob), collapse = '')
-    }, mc.cores = ncores)
-    seqs = unlist(seqs)
-  } else{
-    seqs = sapply(1:n, function(i){
-      paste(sample(c('A', 'C', 'G', 'T'), length[i], replace = T), collapse = '')
-    })
-  }
- 
-  seqs = DNAStringSet(seqs)
-  names(seqs) = paste0('s', 1:n)
-  seqs
-}
