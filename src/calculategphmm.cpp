@@ -100,7 +100,19 @@ inline CharacterVector IntToState(NumericVector x, int t) {
   return path;
 }
 
-
+//' Generate trace back.
+//' 
+//' This function returns the  trace back, i.e. the sequence of most probable 
+//' states in the alignment between read x and reference sequence y.
+//'
+//' @param q double, index of the state for the last two nucleotides in the read and reference sequence.
+//' @param i double, length of the read.
+//' @param j double, length of the reference sequence.
+//' @param Tm matrix, GPHMM probabilities at each location in the read and reference sequence in the M state.
+//' @param Tx matrix, GPHMM probabilities at each location in the read and reference sequence in the insertion state.
+//' @param Ty matrix, GPHMM probabilities at each location in the read and reference sequence in the deletion state.
+//' 
+//' @export
 // [[Rcpp::export]]
 CharacterVector traceBack(double q, double i, double j, 
 NumericMatrix Tm, NumericMatrix Tx, NumericMatrix Ty) {
@@ -129,7 +141,23 @@ NumericMatrix Tm, NumericMatrix Tx, NumericMatrix Ty) {
 
 
 
-
+//' Calculate GPHMM probability.
+//' 
+//' This function returns the GPHMM probability that a read x could have been
+//' sequenced from a reference sequence y.
+//'
+//' @param x string, with the sequence of the read.
+//' @param y string, with the sequence of the reference.
+//' @param tau double, probability to transition from any state to end state.
+//' @param pp matrix, emission probabilities in the M state.
+//' @param qX vector, emission probabilities in the insertion state.
+//' @param qY vector, emission probabilities in the deletion state.
+//' @param dX double, transition probability from the M to the insertion state.
+//' @param dY double, transition probability from the M to the deletion state.
+//' @param eX double, transition probability from the insertion to the insertion state.
+//' @param eY double, transition probability from the deletion to the deletion state.
+//' 
+//' @export
 // [[Rcpp::export]]
 List calculategphmm(std::string x, std::string y,
 double tau, NumericMatrix pp, NumericVector qX, NumericVector qY,

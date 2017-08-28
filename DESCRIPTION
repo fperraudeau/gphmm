@@ -1,16 +1,15 @@
 Package: gphmm
 Type: Package
-Title: GPHMM computation
-Version: 1.1
-Date: 2017-04-26
+Title: GPHMM computation and training
+Version: 0.99.0
+Date: 2017-08-28
 Author: Fanny Perraudeau
-Maintainer: <fperraudeau@berkeley.edu>
-Description: computation of GPHMM probabilities between a reference sequence and a read.
-License: Artistic license
+Maintainer: Fanny Perraudeau <perraudeau.f@gmail.com>
+Description: Computation of GPHMM probabilities between a reference sequence and a read.
+License: Artistic-2.0
 LazyData: TRUE
-Depends: ggplot2
-Imports: jsonlite, parallel, dplyr, reshape, Biostrings, ShortRead, Rcpp, msa, stringr, stringi, Matrix
+Imports: Rcpp, parallel, dplyr, Biostrings, stringr, stringi, stats
 LinkingTo: Rcpp
-Suggests: testthat, knitr, RColorBrewer
+Suggests: testthat, knitr, jsonlite
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

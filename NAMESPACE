@@ -4,16 +4,12 @@
 useDynLib(gphmm)
 exportPattern("^[^\\.]")
 
-import(Biostrings)
-import(ggplot2)
-importFrom(jsonlite, toJSON, fromJSON)
-import(parallel)
+import(Rcpp)
+importFrom(Biostrings, DNAStringSet, width)
+importFrom(parallel, mclapply)
 importFrom(dplyr, "%>%",group_by,summarize,ungroup,filter,mutate,n)
-importFrom(ShortRead, ShortReadQ,ShortRead,readFastq,readFasta,sread,id,writeFastq,writeFasta)
-import(msa)
 importFrom(stringr, str_replace_all)
 importFrom(stringi, stri_count_fixed)
-import(reshape)
-importFrom(Matrix, sparseMatrix, colSums)
+importFrom(stats, binomial, coefficients, glm, rnorm)
 
 

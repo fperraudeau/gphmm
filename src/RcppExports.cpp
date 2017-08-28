@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // traceBack
 CharacterVector traceBack(double q, double i, double j, NumericMatrix Tm, NumericMatrix Tx, NumericMatrix Ty);
-RcppExport SEXP gphmm_traceBack(SEXP qSEXP, SEXP iSEXP, SEXP jSEXP, SEXP TmSEXP, SEXP TxSEXP, SEXP TySEXP) {
+RcppExport SEXP _gphmm_traceBack(SEXP qSEXP, SEXP iSEXP, SEXP jSEXP, SEXP TmSEXP, SEXP TxSEXP, SEXP TySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23,7 +23,7 @@ END_RCPP
 }
 // calculategphmm
 List calculategphmm(std::string x, std::string y, double tau, NumericMatrix pp, NumericVector qX, NumericVector qY, double dX, double dY, double eX, double eY);
-RcppExport SEXP gphmm_calculategphmm(SEXP xSEXP, SEXP ySEXP, SEXP tauSEXP, SEXP ppSEXP, SEXP qXSEXP, SEXP qYSEXP, SEXP dXSEXP, SEXP dYSEXP, SEXP eXSEXP, SEXP eYSEXP) {
+RcppExport SEXP _gphmm_calculategphmm(SEXP xSEXP, SEXP ySEXP, SEXP tauSEXP, SEXP ppSEXP, SEXP qXSEXP, SEXP qYSEXP, SEXP dXSEXP, SEXP dYSEXP, SEXP eXSEXP, SEXP eYSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -40,4 +40,15 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(calculategphmm(x, y, tau, pp, qX, qY, dX, dY, eX, eY));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_gphmm_traceBack", (DL_FUNC) &_gphmm_traceBack, 6},
+    {"_gphmm_calculategphmm", (DL_FUNC) &_gphmm_calculategphmm, 10},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_gphmm(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

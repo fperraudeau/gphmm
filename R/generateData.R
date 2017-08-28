@@ -97,6 +97,7 @@ generateRead <- function(seq = 'ATGCGGATCG', qv = NULL, seed = NULL,
 #' @param sdLen      - float, sd of the length distribution (gaussian) of the generated sequences.
 #' @param seed       - int, when the same seed and parameters are used, exact same sequences are generated.
 #' @param ncores     - int, number of cores to use.
+#' @param prob       - vector of length 4 with the probability for the 4 nucleotides (A, C, G, T).
 generateRandomSequences <- function(n = 2,  meanLen = 10, sdLen = 0,
                                     seed = NULL, ncores = NULL,
                                     prob = rep(.25, 4)){
@@ -106,6 +107,8 @@ generateRandomSequences <- function(n = 2,  meanLen = 10, sdLen = 0,
   }
   
   length = round(rnorm(n = n, mean = meanLen, sd = sdLen))
+  stopifnot(sum(prob) != 0)
+  if (sum(prob) != 1) prob = prob/sum(prob)
   
   if (!is.null(ncores)){
     stopifnot(class(ncores) == 'numeric')
