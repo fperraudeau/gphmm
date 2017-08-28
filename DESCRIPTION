@@ -1,11 +1,11 @@
 Package: gphmm
-Type: Package
-Title: GPHMM computation and training
 Version: 0.99.0
-Date: 2017-08-28
-Author: Fanny Perraudeau
-Maintainer: Fanny Perraudeau <perraudeau.f@gmail.com>
+Title: Computation and Training of GPHMM Model
 Description: Computation of GPHMM probabilities between a reference sequence and a read.
+Authors@R: c(
+    person("Fanny", "Perraudeau", email = "perraudeau.f@gmail.com", role = c("aut", "cre")),
+    person("James", "Bullard", email = "james.bullard@wholebiome.com", role = c("aut"))
+    )
 License: Artistic-2.0
 LazyData: TRUE
 Imports: Rcpp, parallel, dplyr, Biostrings, stringr, stringi, stats
@@ -13,3 +13,5 @@ LinkingTo: Rcpp
 Suggests: testthat, knitr, jsonlite
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+URL: https://github.com/fperraudeau/gphmm
+BugReports: https://github.com/fperraudeau/gphmm/issues
