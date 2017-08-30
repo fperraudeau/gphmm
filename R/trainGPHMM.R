@@ -5,13 +5,18 @@
 #' @param seqs  - DNAStringSet with DNA sequences used for the training.
 #' @param csv   - data.frame with first column = queries, second column = reference sequences, third column = qv
 makeGphmmPerRead <- function(seqs, csv){
+  if (ncol(csv) == 3){
+    stopifnot(class(csv[, 3]) %in% c('numeric', 'character', 'integer'))
+    if (class(csv[, 3]) == 'character') csv[, 3] = as.integer(csv[, 3])
+  }
   gphmmPerRead <- function(i, parameters){
     read = as.character(seqs[csv[i, 1]])
     ref = as.character(seqs[csv[i, 2]])
-    path = computegphmm(read, ref, parameters = parameters, output = 'long')
+    qv = ifelse(ncol(csv) == 3, csv[i, 3], 20)
+    path = computegphmm(read, ref, qv = qv, parameters = parameters, output = 'long') 
     et = computeCounts(path)
     et$vit = path$V
-    et$qv = csv[i, "qv"]
+    et$qv = qv
     et 
   }
   gphmmPerRead

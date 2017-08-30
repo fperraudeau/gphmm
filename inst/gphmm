@@ -72,7 +72,7 @@ if (compute){
     read = as.character(seqs[csv[i, 1]])
     ref = as.character(seqs[csv[i, 2]])
     qv = csv[i, 3]
-    computegphmm(read, ref, qv = qv, parameters = paramgphmm)
+    computegphmm(read, ref, qv = qv, parameters = paramgphmm, output = 'short')
   }, mc.cores = ncores)
   csv[,'gphmm'] = unlist(gphmmProb)
   if (out == '') out = gsub('.csv', '_gphmm.csv', csvPath)

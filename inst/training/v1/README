@@ -1,1 +1,0 @@
-Training on mock community simulated using gr-mock.R with subcommand simulate (i.e. using pbsim sofware). The mock community consisted of whole biome strains in 16S-wballeles.04 (as of 06-07-2016) at nominally equal frequencies.Total number of bacteria was 2000, so about 12000 reads.

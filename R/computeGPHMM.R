@@ -4,10 +4,11 @@
 #' 
 #' @param read         - chr str.
 #' @param ref          - chr str.
+#' @param qv           - float, quality value, default is 20.
 #' @param parameters   - list of GPHMM parameters, can be created by initializeGphmm().
-#' @param qv           - float, quality value.
 #' @param output       - if 'long', output is a list with path, read, ref and log GPHMM proba, else output is just the log GPHMM proba.
-computegphmm <- function(read, ref, parameters, qv = 20, output = "short"){
+computegphmm <- function(read, ref, parameters = initializeGphmm(), qv = 20,
+                         output = "long"){
   p = parameters
   p$pp = log(p$pp)
   p$qX = log(p$qX)

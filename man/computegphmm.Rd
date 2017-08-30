@@ -4,7 +4,8 @@
 \alias{computegphmm}
 \title{Compute GPHMM log probability.}
 \usage{
-computegphmm(read, ref, parameters, qv = 20, output = "short")
+computegphmm(read, ref, parameters = initializeGphmm(), qv = 20,
+  output = "long")
 }
 \arguments{
 \item{read}{- chr str.}
@@ -13,7 +14,7 @@ computegphmm(read, ref, parameters, qv = 20, output = "short")
 
 \item{parameters}{- list of GPHMM parameters, can be created by initializeGphmm().}
 
-\item{qv}{- float, quality value.}
+\item{qv}{- float, quality value, default is 20.}
 
 \item{output}{- if 'long', output is a list with path, read, ref and log GPHMM proba, else output is just the log GPHMM proba.}
 }
