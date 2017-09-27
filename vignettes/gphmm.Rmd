@@ -106,7 +106,7 @@ head(toCompute)
 
 So, there are `r nrow(toCompute)` GPHMM probabilities to compute. Let's call the commandline tool `gphmm compute`
 ```{bash}
-../inst/gphmm compute queries.fasta toCompute.csv --verbose
+../inst/gphmm compute queries.fasta toCompute.csv --verbose --ncores=1
 ```
 
 The output file is the same as the input csv file, but a column has been added with the estimated (log) GPHMM probabilities 
@@ -185,7 +185,7 @@ emiTrans
 Commandline `gphmm train` can be used to estimate the parameters of the model
 
 ```{bash}
-../inst/gphmm train train.fasta train.csv --verbose --maxit=5
+../inst/gphmm train train.fasta train.csv --verbose --maxit=5 --ncores=1
 ```
 
 ## Evaluate performances
