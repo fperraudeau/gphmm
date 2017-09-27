@@ -1,0 +1,28 @@
+#----------------------------------------------------------------
+# Travis-CI configuration for R packages
+#
+# REFERENCES:
+# * Travis CI: https://travis-ci.org/
+# * tutorial: https://docs.travis-ci.com/user/languages/r
+#
+# Validate your .travis.yml file at http://lint.travis-ci.org/
+#----------------------------------------------------------------
+language: r
+cache: packages
+
+# R versions to be tested on
+r:
+  - oldrel
+  - release
+  - devel
+
+## Turn this to true before submission to CRAN/Bioconductor
+warnings_are_errors: true
+
+notifications:
+  email:
+    recipients:
+      - perraudeau.f@gmail.com
+    on_success: always
+    on_failure: always
+
