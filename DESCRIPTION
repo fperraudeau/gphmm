@@ -8,7 +8,7 @@ Authors@R: c(
     )
 License: Artistic-2.0
 LazyData: TRUE
-Imports: Rcpp, parallel, dplyr, Biostrings, stringr, stringi, stats
+Imports: Rcpp, parallel, dplyr, Biostrings, stringr, stringi, stats, docopt
 LinkingTo: Rcpp
 Suggests: testthat, knitr, jsonlite
 VignetteBuilder: knitr
