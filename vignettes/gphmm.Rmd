@@ -16,7 +16,7 @@ library(Biostrings)
 library(jsonlite)
 ```
 
-The gphmm package implements the generalized pair hidden Markov chain model described in FP: add ref.
+The gphmm package implements the generalized pair hidden Markov chain model (GPHMM).
 
 #1. Commandline tool
 
