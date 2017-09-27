@@ -142,10 +142,13 @@ Let's now similate sequencing errors in the true reference sequences using our m
 ```{r}
 qv = rnorm(n, 20, 5)
 qv[qv < 5] = 5
-reads = mclapply(1:n, function(i){
-  generateRead(seq = as.character(seqs[i]), paramgphmm = paramgphmm,
-                qv = qv[i], seed = i)
-}, mc.cores = 2)
+reads = list()
+for (i in 1:n){
+  reads[[i]] = generateRead(seq = as.character(seqs[i]), 
+                            paramgphmm = paramgphmm,
+                            qv = qv[i],
+                            seed = i)
+}
 train = c(seqs, DNAStringSet(sapply(reads, '[[', 1)))
 names(train) = c(names(train)[1:n], gsub('s', 't', names(train)[1:n]))
 csv = data.frame(reads = paste0('t', 1:n), ref = paste0('s', 1:n), qv = qv)
