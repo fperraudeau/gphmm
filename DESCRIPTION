@@ -1,6 +1,6 @@
 Package: gphmm
 Version: 0.99.0
-Title: Computation and Training of GPHMM Model
+Title: Generalized pair hidden Markov chain model for sequence alignment
 Description: 
   Implementation of a generalized pair hidden Markov chain model (GPHMM) that
   can be used to compute the probability of alignment between two sequences
