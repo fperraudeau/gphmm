@@ -5,6 +5,7 @@ useDynLib(gphmm)
 exportPattern("^[^\\.]")
 
 import(Rcpp)
+import(docopt)
 importFrom(Biostrings, DNAStringSet, width)
 importFrom(parallel, mclapply)
 importFrom(dplyr, "%>%",group_by,summarize,ungroup,filter,mutate,n)
