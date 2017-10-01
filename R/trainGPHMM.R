@@ -4,6 +4,11 @@
 #' 
 #' @param seqs  - DNAStringSet with DNA sequences used for the training.
 #' @param csv   - data.frame with first column = queries, second column = reference sequences, third column = qv
+#' @examples 
+#' library(Biostrings)
+#' seqs <- DNAStringSet(c(a='ATGC', b = 'ATGG', c = 'ATGT'))
+#' csv <- data.frame(queries = c('a', 'b'), refs = c('c', 'c'))
+#' makeGphmmPerRead(seqs, csv)
 makeGphmmPerRead <- function(seqs, csv){
   if (ncol(csv) == 3){
     stopifnot(class(csv[, 3]) %in% c('numeric', 'character', 'integer'))
@@ -27,6 +32,9 @@ makeGphmmPerRead <- function(seqs, csv){
 #' \code{computeCounts} returns a list with emission and transition counts.
 #' 
 #' @param gphmm - output of computegphmm with arg output='long'.
+#' @examples 
+#' gphmmOut <- computegphmm('ATCG', 'ATG', output = 'long')
+#' computeCounts(gphmmOut)
 computeCounts <- function(gphmm){
   read = strsplit(gphmm$read, "")[[1]]
   ref = strsplit(gphmm$ref, "")[[1]]
@@ -73,11 +81,11 @@ computeCounts <- function(gphmm){
 #' Compute insertion and deletion rates, i.e., probability to transition from
 #' match/mismatch state to insertion and deletion state.
 #' 
-#' \code{computeDelta} returns list of coefficients from logit regression for insertion and deletion rates.
+#' \code{.computeDelta} returns list of coefficients from logit regression for insertion and deletion rates.
 #' 
 #' @param mat  - matrix with counts for insertions and deletions for each read.
 #' @param qv   - vector with quality values for the reads.
-computeDelta <- function(mat, qv){
+.computeDelta <- function(mat, qv){
   mat = as.data.frame(mat)
   mat$failI = mat$MM + mat$MD
   mat$failD = mat$MM + mat$MI
@@ -88,10 +96,10 @@ computeDelta <- function(mat, qv){
 
 #' Compute normalized emission probabilities.
 #' 
-#' \code{computeQ} returns normalized emission probabilities.
+#' \code{.computeQ} returns normalized emission probabilities.
 #' 
 #' @param emission - vector of length at least 4.
-computeQ <- function(emission){
+.computeQ <- function(emission){
   emission = emission[1:4]
   if (sum(emission) == 0) emission else emission / sum(emission)
 }
@@ -108,11 +116,11 @@ computeQ <- function(emission){
 
 #' Compute normalized transition probabilities.
 #' 
-#' \code{computeEps} returns normalized transition probabilities.
+#' \code{.computeEps} returns normalized transition probabilities.
 #' 
 #' @param transition - named vector with at least elements 'DD','DM','II','IM'.
 #' @param state      - str, "X" or "Y".
-computeEps <- function(transition, state = "X"){
+.computeEps <- function(transition, state = "X"){
   if (state == "Y"){
     normD = sum(transition[c("DD", "DM")])
     if (normD != 0) transition["DD"] / normD else 0
@@ -127,20 +135,28 @@ computeEps <- function(transition, state = "X"){
 #' \code{computeGphmmParam} returns a list with gphmm parameters.
 #' 
 #' @param emiTrans - list with emission and transition counts.
+#' @examples 
+#' library(Biostrings)
+#' seqs <- DNAStringSet(c(a='ATGC', b = 'ATGG', c = 'ATGT'))
+#' csv <- data.frame(queries = c('a', 'b'), refs = c('c', 'c'))
+#' gphmmPerRead <- makeGphmmPerRead(seqs, csv)
+#' parameters <- initializeGphmm()
+#' counts <- lapply(1:nrow(csv), function(i) gphmmPerRead(i, parameters))
+#' computeGphmmParam(counts)
 computeGphmmParam <- function(emiTrans){
   emi = lapply(lapply(c(1:4), function(i) lapply(emiTrans, '[[', i)), function(x) Reduce('+', x))
   names(emi) = c("emissionM", "emissionD", "emissionI","transition")
   qR = colSums(emi$emissionM)[1:4]
   qR = qR/sum(qR)
-  qX = computeQ(emi$emissionI)
-  qY = computeQ(emi$emissionD)
+  qX = .computeQ(emi$emissionI)
+  qY = .computeQ(emi$emissionD)
   pp = .computeP(emi$emissionM)
   tau = 1/1500
-  epsX = computeEps(emi$transition, state = 'X')
-  epsY = computeEps(emi$transition, state = 'Y') 
+  epsX = .computeEps(emi$transition, state = 'X')
+  epsY = .computeEps(emi$transition, state = 'Y') 
   transList = lapply(emiTrans, '[[', 4)
   transMat = do.call(rbind, transList)
-  delta = computeDelta(transMat, qv = sapply(emiTrans, '[[', 6))
+  delta = .computeDelta(transMat, qv = sapply(emiTrans, '[[', 6))
   deltaX = delta[['I']]
   deltaY = delta[['D']]
   list(qR = qR, qX = qX, qY = qY, deltaX = deltaX,

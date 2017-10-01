@@ -12,11 +12,8 @@
 #' @param Tm matrix, GPHMM probabilities at each location in the read and reference sequence in the M state.
 #' @param Tx matrix, GPHMM probabilities at each location in the read and reference sequence in the insertion state.
 #' @param Ty matrix, GPHMM probabilities at each location in the read and reference sequence in the deletion state.
-#' 
-#' @export
-traceBack <- function(q, i, j, Tm, Tx, Ty) {
-    .Call('_gphmm_traceBack', PACKAGE = 'gphmm', q, i, j, Tm, Tx, Ty)
-}
+#'
+NULL
 
 #' Calculate GPHMM probability.
 #' 
@@ -35,6 +32,17 @@ traceBack <- function(q, i, j, Tm, Tx, Ty) {
 #' @param eY double, transition probability from the deletion to the deletion state.
 #' 
 #' @export
+#' @examples
+#' param <- initializeGphmm()
+#' tau <- param[['tau']]
+#' pp <- param[['pp']]
+#' qX <- param[['qX']]
+#' qY <- param[['qY']]
+#' dX <- 1/(1+exp(-sum(param[['deltaX']] * c(1, 20))))
+#' dY <- 1/(1+exp(-sum(param[['deltaY']] * c(1, 20))))
+#' eX <- param[['epsX']]
+#' eY <- param[['epsY']]
+#' calculategphmm('ATCG', 'ATGG', tau, pp, qX, qY, dX, dY, eX, eY)
 calculategphmm <- function(x, y, tau, pp, qX, qY, dX, dY, eX, eY) {
     .Call('_gphmm_calculategphmm', PACKAGE = 'gphmm', x, y, tau, pp, qX, qY, dX, dY, eX, eY)
 }

@@ -7,6 +7,9 @@
 #' @param qv           - float, quality value, default is 20.
 #' @param parameters   - list of GPHMM parameters, can be created by initializeGphmm().
 #' @param output       - if 'long', output is a list with path, read, ref and log GPHMM proba, else output is just the log GPHMM proba.
+#' @examples
+#' computegphmm('TAGC', 'AAG')
+#' computegphmm('TAGC', 'AAG', qv = 30)
 computegphmm <- function(read, ref, parameters = initializeGphmm(), qv = 20,
                          output = "long"){
   p = parameters

@@ -31,3 +31,15 @@ calculategphmm(x, y, tau, pp, qX, qY, dX, dY, eX, eY)
 This function returns the GPHMM probability that a read x could have been
 sequenced from a reference sequence y.
 }
+\examples{
+param <- initializeGphmm()
+tau <- param[['tau']]
+pp <- param[['pp']]
+qX <- param[['qX']]
+qY <- param[['qY']]
+dX <- 1/(1+exp(-sum(param[['deltaX']] * c(1, 20))))
+dY <- 1/(1+exp(-sum(param[['deltaY']] * c(1, 20))))
+eX <- param[['epsX']]
+eY <- param[['epsY']]
+calculategphmm('ATCG', 'ATGG', tau, pp, qX, qY, dX, dY, eX, eY)
+}

@@ -1,7 +1,10 @@
 #' Initial parameters for gphmm.
 #' 
 #' \code{initializeGphmm} returns initial set of parameters for gphmm.
-#' 
+#' @examples
+#' param <- initializeGphmm ()
+#' param[['qR']] <- c(0.1, 0.3, 0.3, 0.1)
+
 initializeGphmm <- function(){
   qR = rep(.25, 4)
   parameters = list(qR = qR,
@@ -29,7 +32,9 @@ initializeGphmm <- function(){
 #' @param qv         - integer, wanted phred quality score for the read.
 #' @param seed       - integer, seed for reproducibility.
 #' @param paramgphmm - list of parameters.
-
+#' @examples 
+#' generateRead('ACGTGCA')
+#' generateRead('ACGTGCA', qv = 10, seed = 1416)
 generateRead <- function(seq = 'ATGCGGATCG', qv = NULL, seed = NULL, 
                           paramgphmm = initializeGphmm()){
   #seed
@@ -98,6 +103,9 @@ generateRead <- function(seq = 'ATGCGGATCG', qv = NULL, seed = NULL,
 #' @param seed       - int, when the same seed and parameters are used, exact same sequences are generated.
 #' @param ncores     - int, number of cores to use.
 #' @param prob       - vector of length 4 with the probability for the 4 nucleotides (A, C, G, T).
+#' @examples
+#' generateRandomSequences(n = 2, meanLen = 20, sdLen = 2)
+#' generateRandomSequences(n = 4, meanLen = 5, sdLen = 0)
 generateRandomSequences <- function(n = 2,  meanLen = 10, sdLen = 0,
                                     seed = NULL, ncores = NULL,
                                     prob = rep(.25, 4)){

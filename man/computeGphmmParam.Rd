@@ -12,3 +12,12 @@ computeGphmmParam(emiTrans)
 \description{
 \code{computeGphmmParam} returns a list with gphmm parameters.
 }
+\examples{
+library(Biostrings)
+seqs <- DNAStringSet(c(a='ATGC', b = 'ATGG', c = 'ATGT'))
+csv <- data.frame(queries = c('a', 'b'), refs = c('c', 'c'))
+gphmmPerRead <- makeGphmmPerRead(seqs, csv)
+parameters <- initializeGphmm()
+counts <- lapply(1:nrow(csv), function(i) gphmmPerRead(i, parameters))
+computeGphmmParam(counts)
+}

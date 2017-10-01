@@ -12,3 +12,7 @@ computeCounts(gphmm)
 \description{
 \code{computeCounts} returns a list with emission and transition counts.
 }
+\examples{
+gphmmOut <- computegphmm('ATCG', 'ATG', output = 'long')
+computeCounts(gphmmOut)
+}

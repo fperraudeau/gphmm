@@ -14,3 +14,9 @@ makeGphmmPerRead(seqs, csv)
 \description{
 \code{makeGphmmPerRead} returns a function to compute gphmm probabilities for each row of the csv file.
 }
+\examples{
+library(Biostrings)
+seqs <- DNAStringSet(c(a='ATGC', b = 'ATGG', c = 'ATGT'))
+csv <- data.frame(queries = c('a', 'b'), refs = c('c', 'c'))
+makeGphmmPerRead(seqs, csv)
+}

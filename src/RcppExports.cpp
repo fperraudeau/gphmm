@@ -5,22 +5,6 @@
 
 using namespace Rcpp;
 
-// traceBack
-CharacterVector traceBack(double q, double i, double j, NumericMatrix Tm, NumericMatrix Tx, NumericMatrix Ty);
-RcppExport SEXP _gphmm_traceBack(SEXP qSEXP, SEXP iSEXP, SEXP jSEXP, SEXP TmSEXP, SEXP TxSEXP, SEXP TySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type i(iSEXP);
-    Rcpp::traits::input_parameter< double >::type j(jSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type Tm(TmSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type Tx(TxSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type Ty(TySEXP);
-    rcpp_result_gen = Rcpp::wrap(traceBack(q, i, j, Tm, Tx, Ty));
-    return rcpp_result_gen;
-END_RCPP
-}
 // calculategphmm
 List calculategphmm(std::string x, std::string y, double tau, NumericMatrix pp, NumericVector qX, NumericVector qY, double dX, double dY, double eX, double eY);
 RcppExport SEXP _gphmm_calculategphmm(SEXP xSEXP, SEXP ySEXP, SEXP tauSEXP, SEXP ppSEXP, SEXP qXSEXP, SEXP qYSEXP, SEXP dXSEXP, SEXP dYSEXP, SEXP eXSEXP, SEXP eYSEXP) {
@@ -43,7 +27,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_gphmm_traceBack", (DL_FUNC) &_gphmm_traceBack, 6},
     {"_gphmm_calculategphmm", (DL_FUNC) &_gphmm_calculategphmm, 10},
     {NULL, NULL, 0}
 };

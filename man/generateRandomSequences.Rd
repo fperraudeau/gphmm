@@ -23,3 +23,7 @@ generateRandomSequences(n = 2, meanLen = 10, sdLen = 0, seed = NULL,
 \description{
 \code{generateRandomSequences} returns a list with indices for train and test sets.
 }
+\examples{
+generateRandomSequences(n = 2, meanLen = 20, sdLen = 2)
+generateRandomSequences(n = 4, meanLen = 5, sdLen = 0)
+}

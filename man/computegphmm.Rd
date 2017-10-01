@@ -21,3 +21,7 @@ computegphmm(read, ref, parameters = initializeGphmm(), qv = 20,
 \description{
 \code{computegphmm} returns GPHMM log probability for a read and a reference sequence.
 }
+\examples{
+computegphmm('TAGC', 'AAG')
+computegphmm('TAGC', 'AAG', qv = 30)
+}

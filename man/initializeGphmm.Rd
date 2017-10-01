@@ -9,3 +9,7 @@ initializeGphmm()
 \description{
 \code{initializeGphmm} returns initial set of parameters for gphmm.
 }
+\examples{
+param <- initializeGphmm ()
+param[['qR']] <- c(0.1, 0.3, 0.3, 0.1)
+}

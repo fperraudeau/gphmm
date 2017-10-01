@@ -19,3 +19,7 @@ generateRead(seq = "ATGCGGATCG", qv = NULL, seed = NULL,
 \description{
 \code{generateRead} returns a list with the noisy read, the true sequence, the path, and the phred quality score.
 }
+\examples{
+generateRead('ACGTGCA')
+generateRead('ACGTGCA', qv = 10, seed = 1416)
+}

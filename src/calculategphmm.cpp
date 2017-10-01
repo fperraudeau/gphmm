@@ -111,9 +111,7 @@ inline CharacterVector IntToState(NumericVector x, int t) {
 //' @param Tm matrix, GPHMM probabilities at each location in the read and reference sequence in the M state.
 //' @param Tx matrix, GPHMM probabilities at each location in the read and reference sequence in the insertion state.
 //' @param Ty matrix, GPHMM probabilities at each location in the read and reference sequence in the deletion state.
-//' 
-//' @export
-// [[Rcpp::export]]
+//'
 CharacterVector traceBack(double q, double i, double j, 
 NumericMatrix Tm, NumericMatrix Tx, NumericMatrix Ty) {
   
@@ -158,6 +156,17 @@ NumericMatrix Tm, NumericMatrix Tx, NumericMatrix Ty) {
 //' @param eY double, transition probability from the deletion to the deletion state.
 //' 
 //' @export
+//' @examples
+//' param <- initializeGphmm()
+//' tau <- param[['tau']]
+//' pp <- param[['pp']]
+//' qX <- param[['qX']]
+//' qY <- param[['qY']]
+//' dX <- 1/(1+exp(-sum(param[['deltaX']] * c(1, 20))))
+//' dY <- 1/(1+exp(-sum(param[['deltaY']] * c(1, 20))))
+//' eX <- param[['epsX']]
+//' eY <- param[['epsY']]
+//' calculategphmm('ATCG', 'ATGG', tau, pp, qX, qY, dX, dY, eX, eY)
 // [[Rcpp::export]]
 List calculategphmm(std::string x, std::string y,
 double tau, NumericMatrix pp, NumericVector qX, NumericVector qY,
