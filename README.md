@@ -10,7 +10,13 @@ The model will be described in details in a paper ... coming soon. In the meanti
 
 ## Installation
 
-We are in the process of submitting the package to CRAN. In the meantime, you can install the development version of `gphmm` from GitHub with the following two lines of code.
+```{r}
+install.packages('gphmm')
+```
+
+Note that `gphmm` package need compilation of C++ code.
+
+Installing from CRAN is recommended. However, if you want to install the version from GitHub, you can do so with the following lines of code
 
 ```{r}
 library(devtools)
