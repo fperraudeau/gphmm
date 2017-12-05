@@ -6,7 +6,7 @@ Generalized Pair Hidden Markov Model (GPHMM)
 
 This package trains a GPHMM and computes GPHMM probabilities.
 
-The model will be described in details in a paper ... coming soon. In the meantime, please don't hesitate to email me if you have questions.
+The model will is described in details in https://www.biorxiv.org/content/early/2017/12/04/228619.
 
 ## Installation
 
